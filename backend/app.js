@@ -38,6 +38,18 @@ app.post('/api/stuff', (req, res, next)=>{
     .catch(error => res.status(400).json({error: error}));
 });
 
+app.put('/api/stuff/:id', (req, res, next) => {
+  Thing.updateOne({_id: req.params.id}, {...req.body, _id: req.params.id})
+  .then(() => res.status(200).json({message: 'Objet Modifié !'}))
+  .catch(error => res.status(400).json({error: error}));
+});
+
+app.delete('/api/stuff/:id', (req, res, next) => {
+  Thing.deleteOne({_id: req.params.id})
+  .then(() => res.status(200).json({message: 'Objet Supprimé !'}))
+  .catch(error => res.status(400).json({error: error}));
+});
+
 app.get('/api/stuff/:id', (req, res, next) =>{
     // req.params.id pour récupérer les params au niveau de l'url précédé par (:)
     Thing.findOne({_id: req.params.id})
