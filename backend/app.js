@@ -29,5 +29,7 @@ app.use(bodyParser.json());
 // on ajoute le début du path pour les stuffRoutes
 app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
+// chemin pour pouvoir récupérer les images depuis le disque local
+app.use('/images', express.static(path.join(__dirname, 'images')))
 
 module.exports = app;
